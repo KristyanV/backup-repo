@@ -28,13 +28,29 @@ public function update_record($id, $data) {
 }
 
 
-    //Login Admin Form
+    // Login - check `users` table only
         public function get_user($username, $password) {
-        $this->db->where('username', $username);
-        $this->db->where('password', $password);
-        $query = $this->db->get('admin');
-        return $query->row();
-    }
+            $this->db->where('username', $username);
+            $this->db->where('password', $password);
+            $query = $this->db->get('users');
+            return $query->row();
+        }
+
+        // Create a new user
+        public function create_user($data) {
+            $this->db->insert('users', $data);
+            return $this->db->insert_id();
+        }
+
+        // Check existing user by username or email
+        public function get_user_by_username_or_email($username, $email) {
+            $this->db->group_start();
+            $this->db->where('username', $username);
+            $this->db->or_where('email', $email);
+            $this->db->group_end();
+            $query = $this->db->get('users');
+            return $query->row();
+        }
 public function mark_as_viewed($report_id)
 {
     $report = $this->db->get_where('attendance_reports', ['id' => $report_id])->row();

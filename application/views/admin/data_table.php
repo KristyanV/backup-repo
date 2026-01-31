@@ -22,10 +22,29 @@
       }
       .wrapper {
         display: flex;
+        min-height: 100vh;
+      }
+      .sidebar {
+        width: 250px;
+        min-width: 200px;
+        border-right: 1px solid #dee2e6;
+        min-height: 100vh;
+        padding: 20px;
+        position: relative; /* allow absolute positioning of footer */
       }
       .content {
-        width: 100%;
+        flex: 1;
         padding: 20px;
+      }
+
+      /* Mobile Responsive: hide sidebar on small screens */
+      @media (max-width: 768px) {
+          .sidebar {
+              display: none;
+          }
+          .content {
+              padding: 12px;
+          }
       }
       .dataTables_wrapper .row {
         margin-bottom: 1rem;
@@ -118,11 +137,35 @@ table#attendanceTable tbody tr {
     line-height: 1.5;
     min-width: 80px;  /* Ensures consistent button widths */
 }
+.sidebar-footer {
+        position: absolute;
+        bottom: 20px;
+        left: 16px; /* align to the left side of the sidebar */
+        width: auto;
+        text-align: left;
+      }
+      @media (max-width: 768px) {
+          .sidebar-footer { display: none; } /* hide on small screens if sidebar hidden */
+      }
     </style>
   </head>
   <body>
     <div class="wrapper">
-      <div class="content">
+      <nav class="sidebar bg-light">
+        <div class="user-info mb-4">
+          <div class="fw-bold">Hello, <?= htmlspecialchars($this->session->userdata('username') ?? 'User') ?></div>
+        </div>
+        
+        <!--
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link active" href="<?= base_url('Main') ?>">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('Main/prepare_reports') ?>">Prepare Reports</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('Public_page/attendance_form') ?>">Attendance Form</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('Main/reports') ?>">Reports</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('Main/users') ?>">Users</a></li>
+        </ul> -->
+      </nav>
+      <div class="content p-3">
         <div class="table-container">
             <!-- Stats Container -->
     <div class="stats-container">
@@ -137,6 +180,9 @@ table#attendanceTable tbody tr {
         </div>
     </div>
 
+          <div class="mb-3 text-end">
+            <a href="<?= base_url('Public_page/attendance_form') ?>" class="btn btn-success">Create Report</a>
+          </div>
           <table id="attendanceTable" class="table table-striped table-bordered">
 <!-- In your View (data_table.php) -->
 <thead class="table-dark text-center align-middle">
@@ -190,6 +236,9 @@ table#attendanceTable tbody tr {
         </div>
       </div>
     </div>
+    <div class="sidebar-footer">
+          <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger btn-sm">Sign out</a>
+        </div>
     <script>
         $(document).ready(function () {
         $('#attendanceTable').DataTable({

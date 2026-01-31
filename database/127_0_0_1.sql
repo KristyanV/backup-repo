@@ -59,6 +59,9 @@ CREATE TABLE IF NOT EXISTS `attendance_reports` (
   `total_present` int DEFAULT NULL,
   `absentees` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `not_in_uniform` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `submitted_by` int DEFAULT NULL,
+  `submitted_by_name` varchar(255) DEFAULT NULL,
+  `submitted_by_role` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `viewed` int NOT NULL,
   PRIMARY KEY (`id`)
@@ -68,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `attendance_reports` (
 -- Dumping data for table `attendance_reports`
 --
 
-INSERT INTO `attendance_reports` (`id`, `division`, `report_date`, `total_employees`, `total_absent`, `total_present`, `absentees`, `not_in_uniform`, `created_at`, `viewed`) VALUES
+INSERT INTO `attendance_reports` (`id`, `division`, `report_date`, `total_employees`, `total_absent`, `total_present`, `absentees`, `not_in_uniform`, `submitted_by`, `submitted_by_name`, `submitted_by_role`, `created_at`, `viewed`) VALUES
 (1, 'FAD', '2026-01-12', 18, 3, 18, '[{\"name\":\"KENT SOLIVA\",\"informed\":\"Informed\",\"cause\":\"none\"}]', '[{\"name\":\"KENT SOLIVA\",\"remarks\":\"WALAY SHOES\"}]', '2026-01-12 06:18:41', 1),
 (2, 'FAD', '2026-01-12', 18, 0, 18, '[{\"name\":\"None\",\"informed\":\"Informed\",\"cause\":\"none\"}]', '[{\"name\":\"All Goods\",\"remarks\":\"n\\/a\"}]', '2026-01-12 06:20:00', 1);
 COMMIT;

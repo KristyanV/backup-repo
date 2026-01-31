@@ -120,7 +120,11 @@
     <div class="input-submit">
       <input type="submit" class="submit-btn" value="Login">
     </div>
-  </form>
+
+    <div style="text-align:center; margin-top:12px;">
+      <a href="<?php echo base_url('Main/signup'); ?>">Don't have an account? <strong>Sign up</strong></a>
+    </div>
+  </form> 
 
 <!-- Flash Success Message via SweetAlert -->
 <!-- Include jQuery and SweetAlert2 (once only per page) -->

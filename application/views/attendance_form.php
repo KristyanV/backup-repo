@@ -428,6 +428,7 @@ margin-top: 30px;
 
   <!-- Optional: Form Submit Button -->
   <div class="submit">
+    <a href="<?= base_url('Main/list') ?>" class="btn btn-secondary me-2">Back to Home</a>
     <button type="submit" class="btn btn-primary">Submit Attendance Report</button>
   </div>
 

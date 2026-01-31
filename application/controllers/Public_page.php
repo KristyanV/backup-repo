@@ -15,6 +15,11 @@ class Public_page extends CI_Controller {
         $this->load->view('attendance_form');
     }
 
+    // Provide an explicit route for the attendance form dropdown/link
+    public function attendance_form() {
+        $this->load->view('attendance_form');
+    }
+
     public function submit() {
         if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             $this->load->view('attendance_form');
@@ -82,6 +87,10 @@ if (!empty($_POST['not_in_uniform']['name'])) {
 }
 
     // Prepare data
+    $user_id = $this->session->userdata('id') ?? null;
+    $user_name = $this->session->userdata('name') ?? null;
+    $user_role = $this->session->userdata('companyposition') ?? null;
+
     $data = [
         'division' => $this->input->post('division'),
         'report_date' => $this->input->post('report_date'),
@@ -89,7 +98,10 @@ if (!empty($_POST['not_in_uniform']['name'])) {
         'total_absent' => $this->input->post('total_absent'),
         'total_present' => $this->input->post('total_present'),
         'absentees' => json_encode($absentees, JSON_THROW_ON_ERROR),
-        'not_in_uniform' => json_encode($not_in_uniform, JSON_THROW_ON_ERROR)
+        'not_in_uniform' => json_encode($not_in_uniform, JSON_THROW_ON_ERROR),
+        'submitted_by' => $user_id,
+        'submitted_by_name' => $user_name,
+        'submitted_by_role' => $user_role
     ];
 
 

@@ -387,9 +387,11 @@ body {
 
   <div class="submitted-by">
     <p class="submitted">Respectfully submitted:</p>
-    <br>
-    <p class="position">Section/Unit Supervisor</p>
-  </div>
+    <?php $submitter_name = htmlspecialchars($report['submitted_by_name'] ?? 'Section/Unit Supervisor'); ?>
+    <?php $submitter_role = htmlspecialchars($report['submitted_by_role'] ?? 'Section/Unit Supervisor'); ?>
+    <p class="signature"><?= $submitter_name ?></p>
+    <p class="position"><?= $submitter_role ?></p>
+  </div> 
 </div>
 
 <div class="footer">
@@ -400,7 +402,7 @@ body {
     <p class="footer-text">Page 1 of 1</p>
   </div>
 </div>
-
+  <a href="<?= base_url('Main/list') ?>" class="btn btn-secondary back-to-home">Back to Home</a>
   </div>
  </form>
 

@@ -273,6 +273,24 @@ body {
 .footer-text {
   margin: 0;
 }
+
+/* Fixed actions bottom center: Back and Update */
+.fixed-actions {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.fixed-actions .btn {
+  min-width: 160px;
+}
+@media print {
+  .fixed-actions { display: none !important; }
+}
   </style>
 
 </head>
@@ -387,9 +405,16 @@ body {
 
   <div class="submitted-by">
     <p class="submitted">Respectfully submitted:</p>
-    <br>
-    <p class="position">Section/Unit Supervisor</p>
+    <?php $submitter_name = htmlspecialchars($attendance_reports['submitted_by_name'] ?? 'Section/Unit Supervisor'); ?>
+    <?php $submitter_role = htmlspecialchars($attendance_reports['submitted_by_role'] ?? 'Section/Unit Supervisor'); ?>
+    <p class="signature"><?= $submitter_name ?></p>
+    <p class="position"><?= $submitter_role ?></p>
   </div>
+</div>
+
+<div class="fixed-actions">
+  <a href="<?= base_url('Main/list') ?>" class="btn btn-secondary">Back to Home</a>
+  <a href="<?= base_url('Public_page/data_update/' . $attendance_reports['id']) ?>" class="btn btn-primary">Update Attendance Report</a>
 </div>
 
 <div class="footer">
@@ -402,12 +427,6 @@ body {
 </div>
 
   </div>
-<div style="text-align: center; margin-top: 30px;">
-  <p>Do you want to Edit?</p>
-  <a href="<?= base_url('Public_page/data_update/' . $attendance_reports['id']) ?>" class="btn btn-primary">
-    Update Attendance Report
-  </a>
-</div>
 
 </body>
 </html>
