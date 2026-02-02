@@ -52,6 +52,34 @@
         outline: none;
         transition: .3s;
       }
+      .password-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        width: 100%;
+      }
+      .password-container input {
+        width: 100%;
+        height: 60px;
+        font-size: 17px;
+        padding: 0 60px 0 25px;
+        border-radius: 30px;
+        border: none;
+        box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.15);
+        outline: none;
+        transition: .3s;
+      }
+      .field-icon {
+        position: absolute;
+        right: 25px;
+        top: 45%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #222;
+        font-size: 15px;
+        z-index: 2;
+      }
       ::placeholder{
         font-weight: 500;
         color: #222;
@@ -91,6 +119,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- SweetAlert2 CSS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -106,7 +137,7 @@
   <body>
   <form method="post" action="<?php echo base_url('Main/checkLogin'); ?>" class="login-box">
     <div class="login-header">
-      <header>LOGIN</header>  
+      <header>WELCOME</header>  
     </div>
 
     <div class="input-box">
@@ -114,15 +145,18 @@
     </div>
 
     <div class="input-box">
-      <input type="password" name="password" class="input-field" placeholder="Password" required>
+      <div class="password-container">
+        <input type="password" id="passwordField" name="password" class="input-field" placeholder="Password" required>
+        <span toggle="#passwordField" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+      </div>
     </div>
 
     <div class="input-submit">
-      <input type="submit" class="submit-btn" value="Login">
+      <input type="submit" class="submit-btn" value="Sign in">
     </div>
 
     <div style="text-align:center; margin-top:12px;">
-      <a href="<?php echo base_url('Main/signup'); ?>">Don't have an account? <strong>Sign up</strong></a>
+      <a href="<?php echo base_url('Main/signup'); ?>" style="color: black;">Don't have an account? <strong>Create an account</strong></a>
     </div>
   </form> 
 
@@ -133,20 +167,32 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    <?php if ($this->session->flashdata('error')): ?>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '<?= $this->session->flashdata('error'); ?>',
-        });
-    <?php elseif ($this->session->flashdata('success')): ?>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '<?= $this->session->flashdata('success'); ?>',
-        });
-    <?php endif; ?>
+$(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
+<?php if ($this->session->flashdata('error')): ?>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '<?= $this->session->flashdata('error'); ?>',
+    });
+<?php elseif ($this->session->flashdata('success')): ?>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '<?= $this->session->flashdata('success'); ?>',
+    });
+<?php endif; ?>
 </script>
 
   </body>
