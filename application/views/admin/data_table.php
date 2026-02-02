@@ -25,7 +25,7 @@
         min-height: 100vh;
       }
       .sidebar {
-        width: 250px;
+        width: 200px;
         min-width: 200px;
         border-right: 1px solid #dee2e6;
         min-height: 100vh;

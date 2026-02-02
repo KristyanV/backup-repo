@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `dateofbirth` date DEFAULT NULL,
   `gender` varchar(20) DEFAULT NULL,
   `companyposition` varchar(255) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),

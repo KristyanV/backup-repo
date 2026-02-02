@@ -58,8 +58,11 @@
             </select>
           </div>
 
-          <div class="col-12">
+          <div class="col-md-6">
             <input type="text" name="companyposition" class="form-control" placeholder="Company / Position">
+          </div>
+          <div class="col-md-6">
+            <input type="text" name="department" class="form-control" placeholder="Division/Section">
           </div>
 
           <div class="col-12">

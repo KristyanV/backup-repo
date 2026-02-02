@@ -55,6 +55,8 @@ class Main extends CI_Controller {
                 'username' => $user->username,
                 'password' => $user->password,
                 'name' => $user->name,
+                'middlename' => $user->middlename,
+                'surname' => $user->surname,
                 'companyposition' => $user->companyposition,
                 'logged_in' => true
             ]);
@@ -165,7 +167,7 @@ public function get_attendance_data()
     // Sign out user and destroy session
     public function signout() {
         // Clear session data
-        $this->session->unset_userdata(['id', 'username', 'password', 'logged_in']);
+        $this->session->unset_userdata(['id', 'username', 'password', 'name', 'middlename', 'surname', 'companyposition', 'logged_in']);
         $this->session->sess_destroy();
         redirect('Main');
     }

@@ -89,7 +89,13 @@ if (!empty($_POST['not_in_uniform']['name'])) {
     // Prepare data
     $user_id = $this->session->userdata('id') ?? null;
     $user_name = $this->session->userdata('name') ?? null;
+    $user_middlename = $this->session->userdata('middlename') ?? null;
+    $user_surname = $this->session->userdata('surname') ?? null;
     $user_role = $this->session->userdata('companyposition') ?? null;
+
+    // Convert middle name to initial only
+    $middle_initial = !empty($user_middlename) ? strtoupper(substr($user_middlename, 0, 1)) . '.' : '';
+    $full_name = strtoupper(trim("$user_name $middle_initial $user_surname"));
 
     $data = [
         'division' => $this->input->post('division'),
@@ -100,7 +106,7 @@ if (!empty($_POST['not_in_uniform']['name'])) {
         'absentees' => json_encode($absentees, JSON_THROW_ON_ERROR),
         'not_in_uniform' => json_encode($not_in_uniform, JSON_THROW_ON_ERROR),
         'submitted_by' => $user_id,
-        'submitted_by_name' => $user_name,
+        'submitted_by_name' => $full_name,
         'submitted_by_role' => $user_role
     ];
 
