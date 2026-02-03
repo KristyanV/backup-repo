@@ -198,7 +198,7 @@ table#attendanceTable tbody tr {
         
         <div style="flex: 1;"></div>
         <div class="sidebar-footer">
-          <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger btn-sm">SIGN OUT</a>
+          <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger btn-sm w-100">SIGN OUT</a>
         </div>
       </nav>
       <div class="content p-3">
@@ -295,10 +295,12 @@ table#attendanceTable tbody tr {
             lengthMenu: "SHOW _MENU_ ENTRIES PER PAGE",
             search: "SEARCH:"
           },
+          order: [],
           columnDefs: [
             { targets: 0, width: "40%" },
             { targets: 1, width: "30%" },
-            { targets: 2, width: "30%" }
+            { targets: 2, width: "30%", orderable: false },
+            { targets: 4, orderable: false }
           ]
         });
       });

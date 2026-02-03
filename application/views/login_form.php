@@ -35,6 +35,12 @@
         text-align: center;
         margin: 20px 0 40px 0;
       }
+      .login-header img {
+        max-width: 180px;
+        height: auto;
+        margin: 0 auto 20px auto;
+        display: block;
+      }
       .login-header header{
         color: #333;
         font-size: 30px;
@@ -137,6 +143,7 @@
   <body>
   <form method="post" action="<?php echo base_url('Main/checkLogin'); ?>" class="login-box">
     <div class="login-header">
+      <img src="<?= base_url('assets/image/prc_logo.png') ?>" alt="PRC Logo">
       <header>WELCOME</header>  
     </div>
 

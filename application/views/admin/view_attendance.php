@@ -162,6 +162,11 @@ body {
   .footer {
     page-break-inside: avoid;
   }
+
+  .action-buttons,
+  .modal {
+    display: none !important;
+  }
   
   .back-to-home {
     display: block;
@@ -483,7 +488,7 @@ body {
   </div>
 </div>
 
-  <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+  <div class="action-buttons" style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
     <a href="<?= base_url('Main/list') ?>" class="btn btn-secondary">BACK TO HOME</a>
     <?php if (isset($user_role) && $user_role === 'note taker'): ?>
       <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#notedConfirmModal">
