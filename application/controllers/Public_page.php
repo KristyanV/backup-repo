@@ -332,6 +332,9 @@ if (!empty($_POST['not_in_uniform']['name'])) {
     }
 }
 
+        // Get current record to check if it's noted
+        $current_record = $this->Attendance_model->getDataById($id);
+        
         // Process data
     $data = [
     'division' => $this->input->post('division'),
@@ -342,6 +345,14 @@ if (!empty($_POST['not_in_uniform']['name'])) {
     'absentees' => json_encode($absentees),
     'not_in_uniform' => json_encode($not_in_uniform)
 ];
+
+        // If record was noted, revert it back to pending
+        if (!empty($current_record['is_noted']) && $current_record['is_noted'] == 1) {
+            $data['is_noted'] = 0;
+            $data['noted_by_name'] = NULL;
+            $data['noted_by_role'] = NULL;
+            $data['noted_at'] = NULL;
+        }
 
         try {
             $status = $this->Attendance_model->update_record($id, $data);
