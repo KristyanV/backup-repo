@@ -395,8 +395,13 @@ body {
   <div class="signature-section">
   <div class="submitted-by">
     <p class="noted">NOTED:</p>
-    <p class="signature">ARJEN C. DE LOS SANTOS</p>
-    <p class="position">Division OIC</p> 
+    <?php if (!empty($report['noted_by_name'])): ?>
+      <p class="signature"><?= htmlspecialchars($report['noted_by_name']) ?></p>
+      <p class="position"><?= htmlspecialchars($report['noted_by_role'] ?? 'Authorized Signatory') ?></p>
+    <?php else: ?>
+      <p class="signature">_______________________</p>
+      <p class="position">Authorized Signatory</p>
+    <?php endif; ?>
    <div class="submission-note">
   To be submitted to the HRD Division on or before 3:00 P.M.
 </div>

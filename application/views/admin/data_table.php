@@ -21,18 +21,22 @@
       body {
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
       }
       .wrapper {
         display: flex;
-        min-height: 100vh;
+        flex: 1;
       }
       .sidebar {
         width: 200px;
         min-width: 200px;
         border-right: 1px solid #dee2e6;
-        min-height: 100vh;
+        min-height: 100%;
         padding: 20px;
-        position: relative; /* allow absolute positioning of footer */
+        display: flex;
+        flex-direction: column;
       }
       .content {
         flex: 1;
@@ -144,11 +148,15 @@ table#attendanceTable tbody tr {
     margin-right: 10px;
 }
 .sidebar-footer {
-        position: absolute;
-        bottom: 20px;
-        left: 16px; /* align to the left side of the sidebar */
-        width: auto;
+        background-color: #f8f9fa;
+        border-top: 1px solid #dee2e6;
+        padding: 15px 0;
         text-align: left;
+        width: 100%;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
       @media (max-width: 768px) {
           .sidebar-footer { display: none; } /* hide on small screens if sidebar hidden */
@@ -187,6 +195,11 @@ table#attendanceTable tbody tr {
           <li class="nav-item"><a class="nav-link" href="<?= base_url('Main/reports') ?>">Reports</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('Main/users') ?>">Users</a></li>
         </ul> -->
+        
+        <div style="flex: 1;"></div>
+        <div class="sidebar-footer">
+          <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger btn-sm">SIGN OUT</a>
+        </div>
       </nav>
       <div class="content p-3">
         <div class="table-container">
@@ -272,9 +285,6 @@ table#attendanceTable tbody tr {
         </div>
       </div>
     </div>
-    <div class="sidebar-footer">
-          <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger btn-sm">SIGN OUT</a>
-        </div>
     <script>
         $(document).ready(function () {
         $('#attendanceTable').DataTable({

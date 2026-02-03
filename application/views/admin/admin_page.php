@@ -24,6 +24,21 @@
         justify-content: space-between;
         gap: 12px;
       }
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .logo-section img {
+        height: 70px;
+        width: auto;
+      }
+      .header-text h2 {
+        margin: 0;
+      }
+      .header-text .text-muted {
+        margin: 0;
+      }
       .table th {
         background: #f8f9fa;
       }
@@ -35,9 +50,12 @@
   <body>
     <div class="container-fluid py-4">
       <div class="page-header mb-4">
-        <div>
-          <h2 class="mb-1">Admin Dashboard</h2>
-          <strong><div class="text-muted">Hello, <?= htmlspecialchars($this->session->userdata('username') ?? 'Admin') ?></div></strong>
+        <div class="logo-section">
+          <img src="<?= base_url('assets/image/prc_logo.png') ?>" alt="PRC Logo">
+          <div class="header-text">
+            <h2 class="mb-1">Admin Dashboard</h2>
+            <strong><div class="text-muted">Hello, <?= htmlspecialchars($this->session->userdata('username') ?? 'Admin') ?></div></strong>
+          </div>
         </div>
         <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger">Sign out</a>
       </div>

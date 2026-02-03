@@ -190,7 +190,7 @@ if (!empty($_POST['not_in_uniform']['name'])) {
     }// Controller: View_attendance.php
 public function view_report2($id) {
     $data['attendance_reports'] = $this->Attendance_model->getDataById($id);
-$this->load->view('admin/View_attendance2', $data);
+$this->load->view('admin/view_attendance2', $data);
 
 }
 
