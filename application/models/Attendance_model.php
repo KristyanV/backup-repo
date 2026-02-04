@@ -110,6 +110,23 @@ public function update_record($id, $data) {
             $query = $this->db->get('users');
             return $query->row();
         }
+
+        // Check existing user by username or email excluding a specific user
+        public function get_user_by_username_or_email_except($username, $email, $user_id) {
+            $this->db->group_start();
+            $this->db->where('username', $username);
+            $this->db->or_where('email', $email);
+            $this->db->group_end();
+            $this->db->where('id !=', $user_id);
+            $query = $this->db->get('users');
+            return $query->row();
+        }
+
+        // Update user details
+        public function update_user($user_id, $data) {
+            $this->db->where('id', $user_id);
+            return $this->db->update('users', $data);
+        }
 public function mark_as_viewed($report_id)
 {
     $report = $this->db->get_where('attendance_reports', ['id' => $report_id])->row();

@@ -263,6 +263,56 @@ public function add_employee()
     }
 }
 
+// Update employee details
+public function update_employee()
+{
+    if (!$this->session->userdata('is_admin')) {
+        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+        return;
+    }
+
+    $user_id = $this->input->post('user_id');
+    $email = $this->input->post('email');
+    $username = $this->input->post('username');
+    $name = $this->input->post('name');
+    $middlename = $this->input->post('middlename');
+    $surname = $this->input->post('surname');
+    $dateofbirth = $this->input->post('dateofbirth');
+    $gender = $this->input->post('gender');
+    $companyposition = $this->input->post('companyposition');
+    $department = $this->input->post('department');
+
+    if (empty($user_id) || empty($email) || empty($username) || empty($name) || empty($surname) || empty($dateofbirth) || empty($gender) || empty($department)) {
+        echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+        return;
+    }
+
+    if ($this->Attendance_model->get_user_by_username_or_email_except($username, $email, $user_id)) {
+        echo json_encode(['success' => false, 'message' => 'Username or email already exists']);
+        return;
+    }
+
+    $data = [
+        'email' => $email,
+        'username' => $username,
+        'name' => $name,
+        'middlename' => $middlename,
+        'surname' => $surname,
+        'dateofbirth' => $dateofbirth,
+        'gender' => $gender,
+        'companyposition' => $companyposition,
+        'department' => $department
+    ];
+
+    $result = $this->Attendance_model->update_user($user_id, $data);
+
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Employee updated successfully']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to update employee']);
+    }
+}
+
 
 public function mark_viewed($report_id)
 {

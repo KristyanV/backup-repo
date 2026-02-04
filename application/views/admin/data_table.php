@@ -24,6 +24,8 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        background: #f3f5f9;
+        color: #1f2937;
       }
       .wrapper {
         display: flex;
@@ -32,15 +34,34 @@
       .sidebar {
         width: 200px;
         min-width: 200px;
-        border-right: 1px solid #dee2e6;
+        border-right: 1px solid #e5e7eb;
         min-height: 100%;
         padding: 20px;
         display: flex;
         flex-direction: column;
+        background: #ffffff;
+        box-shadow: 0 8px 24px rgba(31,41,55,0.08);
       }
       .content {
         flex: 1;
-        padding: 20px;
+        padding: 24px;
+      }
+
+      .sidebar .nav-btn {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 12px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        font-size: 12px;
+        box-shadow: 0 4px 10px rgba(31,41,55,0.08);
+      }
+      .sidebar .btn-create-report {
+        font-size: 14px;
       }
 
       /* Mobile Responsive: hide sidebar on small screens */
@@ -66,32 +87,32 @@
       }
       .stats-container {
     display: flex;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    gap: 50px;
+    justify-content: flex-start;
+    margin-bottom: 1.25rem;
+    gap: 18px;
 }
 
 .stat-box {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 15px 25px;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 14px 18px;
     flex: 1;
-    max-width: 200px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border: 1px solid #dee2e6;
+    max-width: 220px;
+    box-shadow: 0 10px 24px rgba(31,41,55,0.08);
+    border: 1px solid #e5e7eb;
 }
 
 .stat-label {
-    color: #6c757d;
+  color: #6b7280;
     margin: 0;
-    font-size: 14px;
-    font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .stat-number {
-    color: #082358;
+  color: #111827;
     margin: 5px 0 0 0;
-    font-size: 24px;
+  font-size: 22px;
     font-weight: 700;
 }
 
@@ -116,11 +137,18 @@
 .table-container {
     width: 100%;
     margin-top: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(31,41,55,0.08);
+  padding: 18px;
 }
 
 table#attendanceTable tbody tr {
     background-color: #ffffff;
     cursor: default;
+}
+table#attendanceTable tbody tr:hover {
+  background-color: #f8fafc;
 }
 /* Add to your CSS */
 .status-header {
@@ -142,16 +170,29 @@ table#attendanceTable tbody tr {
     font-size: 0.875rem;
     line-height: 1.5;
     min-width: 80px;  /* Ensures consistent button widths */
+  border-radius: 10px;
+}
+.table thead th {
+  background: #111827;
+  color: #ffffff;
+  border-bottom: 0;
+}
+.table {
+  border-radius: 12px;
+  overflow: hidden;
 }
 #attendanceTable_filter input {
-    margin-left: auto;
-    margin-right: 10px;
+  margin-left: auto;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 6px 10px;
 }
-.sidebar-footer {
-        background-color: #f8f9fa;
-        border-top: 1px solid #dee2e6;
+      .sidebar-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
         padding: 15px 0;
-        text-align: left;
+        text-align: center;
         width: 100%;
         margin-left: -20px;
         margin-right: -20px;
@@ -171,20 +212,19 @@ table#attendanceTable tbody tr {
         </div>
         
         <div class="user-info mb-4">
-          <div class="fw-bold">HELLO,</div>
-          <div class="fw-bold"><?= htmlspecialchars($this->session->userdata('full_name') ?? $this->session->userdata('username') ?? 'User') ?></div>
+          <div class="fw-bold">Hello, <?= htmlspecialchars($this->session->userdata('name') ?? $this->session->userdata('full_name') ?? $this->session->userdata('username') ?? 'User') ?></div>
         </div>
         
         <?php if (isset($is_admin) && $is_admin == 1): ?>
-        <div class="mb-4">
-          <a href="<?= base_url('Main/admin') ?>" class="btn btn-primary w-90">
+        <div class="mb-3">
+          <a href="<?= base_url('Main/admin') ?>" class="btn btn-primary nav-btn">
             <i class="bi bi-arrow-left-circle"></i> ADMIN DASHBOARD
           </a>
         </div>
         <?php endif; ?>
         
         <div class="mb-4">
-          <a href="<?= base_url('Public_page/attendance_form') ?>" class="btn btn-success w-90">CREATE A REPORT</a>
+          <a href="<?= base_url('Public_page/attendance_form') ?>" class="btn btn-success nav-btn btn-create-report">CREATE A REPORT</a>
         </div>
         
         <!--
@@ -198,7 +238,7 @@ table#attendanceTable tbody tr {
         
         <div style="flex: 1;"></div>
         <div class="sidebar-footer">
-          <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger btn-sm w-100">SIGN OUT</a>
+          <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger nav-btn">SIGN OUT</a>
         </div>
       </nav>
       <div class="content p-3">

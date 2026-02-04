@@ -11,25 +11,55 @@
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-      body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:#f4f4f4;font-family:Arial, sans-serif}
-      .signup-box{width:520px;background:#fff;padding:28px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
-      .signup-box h2{text-align:center;margin-bottom:20px}
-      .form-control{height:48px}
-      .submit-btn{height:48px}
-      .small-note{font-size:14px;color:black;margin-top:10px;text-align:center}
+      body{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+        background:#f3f5f9;
+        font-family:Arial, sans-serif
+      }
+      .signup-box{
+        width:560px;
+        background:#fff;
+        padding:30px;
+        border-radius:16px;
+        box-shadow:0 16px 40px rgba(31,41,55,0.12)
+      }
+      .signup-box h2{
+        text-align:center;
+        margin-bottom:8px;
+        font-weight:700;
+        color:#111827
+      }
+      .signup-subtitle{
+        text-align:center;
+        color:#6b7280;
+        font-size:14px;
+        margin-bottom:22px
+      }
+      .form-control{height:46px;border-radius:10px;border:1px solid #d1d5db}
+      .form-control:focus{border-color:#2563eb;box-shadow:0 0 0 0.2rem rgba(37,99,235,0.15)}
+      .submit-btn{height:48px;border-radius:12px;font-weight:600}
+      .small-note{font-size:14px;color:#374151;margin-top:12px;text-align:center}
       .password-container {position:relative;display:flex;align-items:center;width:100%}
-      .password-container input {width:100%;height:48px;padding:0 50px 0 12px;border-radius:4px;border:1px solid #ced4da;outline:none}
-      .password-container input:focus {border-color:#80bdff;box-shadow:0 0 0 0.2rem rgba(0,123,255,0.25)}
-      .field-icon {position:absolute;right:15px;top:50%;transform:translateY(-50%);cursor:pointer;color:#222;font-size:16px;z-index:2}
+      .password-container input {width:100%;height:46px;padding:0 50px 0 12px;border-radius:10px;border:1px solid #d1d5db;outline:none}
+      .password-container input:focus {border-color:#2563eb;box-shadow:0 0 0 0.2rem rgba(37,99,235,0.15)}
+      .field-icon {position:absolute;right:15px;top:50%;transform:translateY(-50%);cursor:pointer;color:#111827;font-size:16px;z-index:2}
       .password-match-icon {position:absolute;right:45px;top:50%;transform:translateY(-50%);font-size:16px;z-index:1;display:none}
       .password-match-icon.error {color:#dc3545;display:block}
-      .password-match-icon.success {color:#28a745;display:block}
+      .password-match-icon.success {color:#16a34a;display:block}
+      .btn-dark{
+        background:#111827;
+        border-color:#111827
+      }
     </style>
   </head>
   <body>
 
     <div class="signup-box">
       <h2>Create an account</h2>
+      <div class="signup-subtitle">Fill in your details to get started</div>
 
       <form method="post" action="<?php echo base_url('Main/register'); ?>" id="signupForm">
 

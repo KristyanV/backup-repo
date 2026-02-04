@@ -13,17 +13,23 @@
     
     <style>
       body {
-        background: #f5f6f8;
+        background: #f3f5f9;
+        color: #1f2937;
+      }
+      .container-fluid {
+        max-width: 1300px;
       }
       .card {
-        border: 1px solid #e1e4e8;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        border: 0;
+        border-radius: 14px;
+        box-shadow: 0 8px 24px rgba(31,41,55,0.08);
       }
       .page-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
+        padding: 8px 4px;
       }
       .logo-section {
         display: flex;
@@ -36,29 +42,112 @@
       }
       .header-text h2 {
         margin: 0;
+        font-weight: 700;
       }
       .header-text .text-muted {
         margin: 0;
+        font-size: 0.95rem;
       }
-      .table th {
-        background: #f8f9fa;
+      .hero-actions .card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .hero-actions .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba(31,41,55,0.12);
+      }
+      .card h5 {
+        font-weight: 600;
+      }
+      .table {
+        border-radius: 12px;
+        overflow: hidden;
       }
       .table thead th {
-        color: #000000 !important;
+        background: #eef2f7;
+        color: #111827 !important;
+        font-weight: 600;
+        border-bottom: 0;
+      }
+      .table tbody tr:hover {
+        background: #f8fafc;
+      }
+      .action-cell {
+        width: 1%;
+        white-space: nowrap;
+      }
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: flex-start;
+        width: max-content;
+      }
+      .btn {
+        border-radius: 10px;
+      }
+      .btn-outline-danger {
+        border-radius: 999px;
+      }
+      .search-bar {
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        padding: 10px 14px;
       }
       /* Signup Form Styles */
       .signup-box{width:520px;background:#fff;padding:28px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
       .signup-box h2{text-align:center;margin-bottom:20px}
-      .form-control{height:48px}
+      .form-control{height:46px;border-radius:10px;border:1px solid #d1d5db}
+      .form-control:focus{border-color:#2563eb;box-shadow:0 0 0 0.2rem rgba(37,99,235,0.15)}
+      .form-select{height:46px;border-radius:10px;border:1px solid #d1d5db}
+      .form-select:focus{border-color:#2563eb;box-shadow:0 0 0 0.2rem rgba(37,99,235,0.15)}
       .submit-btn{height:48px}
-      .small-note{font-size:14px;color:black;margin-top:10px;text-align:center}
+      .small-note{font-size:14px;color:#374151;margin-top:12px;text-align:center}
       .password-container {position:relative;display:flex;align-items:center;width:100%}
-      .password-container input {width:100%;height:48px;padding:0 50px 0 12px;border-radius:4px;border:1px solid #ced4da;outline:none}
-      .password-container input:focus {border-color:#80bdff;box-shadow:0 0 0 0.2rem rgba(0,123,255,0.25)}
-      .field-icon {position:absolute;right:15px;top:50%;transform:translateY(-50%);cursor:pointer;color:#222;font-size:16px;z-index:2}
+      .password-container input {width:100%;height:46px;padding:0 50px 0 12px;border-radius:10px;border:1px solid #d1d5db;outline:none}
+      .password-container input:focus {border-color:#2563eb;box-shadow:0 0 0 0.2rem rgba(37,99,235,0.15)}
+      .field-icon {position:absolute;right:15px;top:50%;transform:translateY(-50%);cursor:pointer;color:#111827;font-size:16px;z-index:2}
       .password-match-icon {position:absolute;right:45px;top:50%;transform:translateY(-50%);font-size:16px;z-index:1;display:none}
       .password-match-icon.error {color:#dc3545;display:block}
-      .password-match-icon.success {color:#28a745;display:block}
+      .password-match-icon.success {color:#16a34a;display:block}
+      .swal2-popup {
+        border-radius: 16px !important;
+        padding: 26px 26px 22px !important;
+      }
+      .swal2-title {
+        font-weight: 700 !important;
+        color: #111827 !important;
+        margin-bottom: 16px !important;
+        font-size: 24px !important;
+      }
+      .swal2-html-container {
+        margin: 0 !important;
+      }
+      .swal2-actions {
+        margin-top: 20px !important;
+        gap: 10px !important;
+      }
+      .swal2-confirm.btn-modern {
+        background: #111827 !important;
+        color: #fff !important;
+        border-radius: 12px !important;
+        padding: 11px 24px !important;
+        border: 0 !important;
+        font-weight: 600 !important;
+      }
+      .swal2-cancel.btn-modern {
+        background: #e5e7eb !important;
+        color: #111827 !important;
+        border-radius: 12px !important;
+        padding: 11px 24px !important;
+        border: 0 !important;
+        font-weight: 600 !important;
+      }
+      .modal-form .form-control,
+      .modal-form .form-select {
+        border-radius: 10px;
+        height: 46px;
+      }
     </style>
   </head>
   <body>
@@ -74,7 +163,7 @@
         <a href="<?= base_url('Main/signout') ?>" class="btn btn-outline-danger">Sign out</a>
       </div>
 
-      <div class="row g-3 mb-4">
+      <div class="row g-3 mb-4 hero-actions">
         <div class="col-md-4">
           <div class="card p-3">
             <h5 class="mb-2">Attendance Reports</h5>
@@ -106,7 +195,7 @@
         
         <!-- Search Function -->
         <div class="mb-3">
-          <input type="text" id="searchName" class="form-control" placeholder="Search by name...">
+          <input type="text" id="searchName" class="form-control search-bar" placeholder="Search by name...">
         </div>
         
         <div class="table-responsive">
@@ -119,7 +208,7 @@
                 <th>Name</th>
                 <th>Position</th>
                 <th>Role</th>
-                <th>Action</th>
+                <th class="action-cell">Action</th>
               </tr>
             </thead>
             <tbody id="userTableBody">
@@ -131,22 +220,37 @@
                     <td><?= htmlspecialchars($user['email']) ?></td>
                     <td><?= htmlspecialchars($user['name'] . ' ' . ($user['surname'] ?? '')) ?></td>
                     <td><?= htmlspecialchars($user['companyposition'] ?? 'N/A') ?></td>
-                    <td>
+                    <td class="action-cell">
                       <span class="role-badge-<?= $user['id'] ?>">
                         <?= strtoupper(htmlspecialchars($user['role'] ?? 'viewer')) ?>
                       </span>
                     </td>
                     <td>
-                      <button class="btn btn-sm btn-warning edit-role-btn" 
-                              data-user-id="<?= $user['id'] ?>" 
-                              data-current-role="<?= htmlspecialchars($user['role'] ?? 'viewer') ?>">
-                        EDIT ROLE
-                      </button>
-                      <button class="btn btn-sm btn-danger reset-password-btn" 
-                              data-user-id="<?= $user['id'] ?>" 
-                              data-username="<?= htmlspecialchars($user['username']) ?>">
-                        RESET PASSWORD
-                      </button>
+                      <div class="action-buttons">
+                        <button class="btn btn-sm btn-primary edit-employee-btn"
+                                data-user-id="<?= $user['id'] ?>"
+                                data-email="<?= htmlspecialchars($user['email'] ?? '') ?>"
+                                data-username="<?= htmlspecialchars($user['username'] ?? '') ?>"
+                                data-name="<?= htmlspecialchars($user['name'] ?? '') ?>"
+                                data-middlename="<?= htmlspecialchars($user['middlename'] ?? '') ?>"
+                                data-surname="<?= htmlspecialchars($user['surname'] ?? '') ?>"
+                                data-dateofbirth="<?= htmlspecialchars($user['dateofbirth'] ?? '') ?>"
+                                data-gender="<?= htmlspecialchars($user['gender'] ?? '') ?>"
+                                data-companyposition="<?= htmlspecialchars($user['companyposition'] ?? '') ?>"
+                                data-department="<?= htmlspecialchars($user['department'] ?? '') ?>">
+                          EDIT DETAILS
+                        </button>
+                        <button class="btn btn-sm btn-warning edit-role-btn" 
+                                data-user-id="<?= $user['id'] ?>" 
+                                data-current-role="<?= htmlspecialchars($user['role'] ?? 'viewer') ?>">
+                          EDIT ROLE
+                        </button>
+                        <button class="btn btn-sm btn-danger reset-password-btn" 
+                                data-user-id="<?= $user['id'] ?>" 
+                                data-username="<?= htmlspecialchars($user['username']) ?>">
+                          RESET PASSWORD
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 <?php endforeach; ?>
@@ -181,7 +285,7 @@
           Swal.fire({
             title: 'Add New Employee',
             html: `
-              <div style="max-width: 520px; margin: 0 auto;">
+              <div class="modal-form" style="max-width: 560px; margin: 0 auto;">
                 <form id="addEmployeeForm">
                   <div class="row g-3">
                     <div class="col-md-6">
@@ -244,9 +348,14 @@
               </div>
             `,
             showCancelButton: true,
+            showCloseButton: true,
             confirmButtonText: 'Add Employee',
             cancelButtonText: 'Cancel',
-            confirmButtonColor: '#212529',
+            customClass: {
+              confirmButton: 'btn-modern',
+              cancelButton: 'btn-modern'
+            },
+            buttonsStyling: true,
             didOpen: function(modal) {
               // Add event listeners for password visibility toggle
               $('.toggle-password-emp').on('click', function() {
@@ -358,6 +467,7 @@
             allUsers.forEach(row => {
               const clonedRow = row.clone();
               $('#userTableBody').append(clonedRow);
+              attachEditEmployeeListener(clonedRow);
               attachEditRoleListener(clonedRow);
               attachResetPasswordListener(clonedRow);
             });
@@ -373,6 +483,7 @@
               filteredRows.forEach(row => {
                 const clonedRow = row.clone();
                 $('#userTableBody').append(clonedRow);
+                attachEditEmployeeListener(clonedRow);
                 attachEditRoleListener(clonedRow);
                 attachResetPasswordListener(clonedRow);
               });
@@ -389,6 +500,13 @@
           });
         }
 
+        // Attach edit employee listener to dynamically added buttons
+        function attachEditEmployeeListener(rowElement) {
+          $(rowElement).find('.edit-employee-btn').on('click', function() {
+            handleEditEmployee($(this));
+          });
+        }
+
         // Attach reset password listener to dynamically added buttons
         function attachResetPasswordListener(rowElement) {
           $(rowElement).find('.reset-password-btn').on('click', function() {
@@ -397,6 +515,10 @@
         }
 
         // Initial attachment
+        $('.edit-employee-btn').on('click', function() {
+          handleEditEmployee($(this));
+        });
+
         $('.edit-role-btn').on('click', function() {
           handleEditRole($(this));
         });
@@ -404,6 +526,140 @@
         $('.reset-password-btn').on('click', function() {
           handleResetPassword($(this));
         });
+
+        function escapeHtml(value) {
+          return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
+
+        // Handle edit employee details
+        function handleEditEmployee(button) {
+          const userId = button.data('user-id');
+          const email = button.data('email') || '';
+          const username = button.data('username') || '';
+          const name = button.data('name') || '';
+          const middlename = button.data('middlename') || '';
+          const surname = button.data('surname') || '';
+          const dateofbirth = button.data('dateofbirth') || '';
+          const gender = button.data('gender') || '';
+          const companyposition = button.data('companyposition') || '';
+          const department = button.data('department') || '';
+
+          Swal.fire({
+            title: 'Update Employee Details',
+            html: `
+              <div style="max-width: 520px; margin: 0 auto;">
+                <form id="editEmployeeForm">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <input type="email" id="edit-email" class="form-control" placeholder="Email" value="${escapeHtml(email)}" required>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" id="edit-username" class="form-control" placeholder="Username" value="${escapeHtml(username)}" required>
+                    </div>
+
+                    <div class="col-md-4">
+                      <input type="text" id="edit-name" class="form-control" placeholder="First name" value="${escapeHtml(name)}" required>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="edit-middlename" class="form-control" placeholder="Middle name" value="${escapeHtml(middlename)}">
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="edit-surname" class="form-control" placeholder="Surname" value="${escapeHtml(surname)}" required>
+                    </div>
+
+                    <div class="col-md-6">
+                      <input type="date" id="edit-dateofbirth" class="form-control" value="${escapeHtml(dateofbirth)}" required>
+                    </div>
+                    <div class="col-md-6">
+                      <select id="edit-gender" class="form-control" required>
+                        <option value="">Select gender</option>
+                        <option value="Male" ${gender === 'Male' ? 'selected' : ''}>Male</option>
+                        <option value="Female" ${gender === 'Female' ? 'selected' : ''}>Female</option>
+                        <option value="Other" ${gender === 'Other' ? 'selected' : ''}>Other</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <input type="text" id="edit-position" class="form-control" placeholder="Company / Position" value="${escapeHtml(companyposition)}">
+                    </div>
+                    <div class="col-md-6">
+                      <select id="edit-department" class="form-control" required>
+                        <option value="">Select Division/Section</option>
+                        <option value="FAD" ${department === 'FAD' ? 'selected' : ''}>FAD</option>
+                        <option value="DUMMY1" ${department === 'DUMMY1' ? 'selected' : ''}>DUMMY1</option>
+                        <option value="DUMMY2" ${department === 'DUMMY2' ? 'selected' : ''}>DUMMY2</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Update',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#0d6efd',
+            preConfirm: () => {
+              const updatedEmail = $('#edit-email').val().trim();
+              const updatedUsername = $('#edit-username').val().trim();
+              const updatedName = $('#edit-name').val().trim();
+              const updatedMiddlename = $('#edit-middlename').val().trim();
+              const updatedSurname = $('#edit-surname').val().trim();
+              const updatedDateOfBirth = $('#edit-dateofbirth').val().trim();
+              const updatedGender = $('#edit-gender').val();
+              const updatedPosition = $('#edit-position').val().trim();
+              const updatedDepartment = $('#edit-department').val();
+
+              if (!updatedEmail || !updatedUsername || !updatedName || !updatedSurname || !updatedDateOfBirth || !updatedGender || !updatedDepartment) {
+                Swal.showValidationMessage('Please fill in all required fields');
+                return false;
+              }
+
+              if (!updatedEmail.includes('@')) {
+                Swal.showValidationMessage('Please enter a valid email');
+                return false;
+              }
+
+              return {
+                user_id: userId,
+                email: updatedEmail,
+                username: updatedUsername,
+                name: updatedName,
+                middlename: updatedMiddlename,
+                surname: updatedSurname,
+                dateofbirth: updatedDateOfBirth,
+                gender: updatedGender,
+                companyposition: updatedPosition,
+                department: updatedDepartment
+              };
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $.ajax({
+                url: '<?= base_url('Main/update_employee') ?>',
+                type: 'POST',
+                data: result.value,
+                success: function(response) {
+                  const res = JSON.parse(response);
+                  if (res.success) {
+                    Swal.fire('Success!', res.message, 'success').then(() => {
+                      location.reload();
+                    });
+                  } else {
+                    Swal.fire('Error!', res.message, 'error');
+                  }
+                },
+                error: function() {
+                  Swal.fire('Error!', 'Failed to update employee', 'error');
+                }
+              });
+            }
+          });
+        }
 
         // Handle edit role modal
         function handleEditRole(button) {

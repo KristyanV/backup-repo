@@ -296,6 +296,90 @@ margin-top: 30px;
   }
 }
 
+/* Modern UI Overrides */
+body {
+  background-color: #f3f5f9;
+  max-width: none;
+  padding: 32px 20px;
+}
+.page-shell {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(31,41,55,0.12);
+  padding: 24px;
+}
+.attendance-container {
+  padding: 0;
+}
+.attendance-table {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+}
+#logo-cell,
+.header-text,
+.sub-header {
+  border: 1px solid #e5e7eb;
+}
+.sub-header {
+  background-color: #eef2ff;
+}
+.report-container {
+  margin: 24px 0 10px;
+}
+.report-header {
+  font-size: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.report-header select,
+.report-header input,
+.report-info input,
+select,
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  height: 40px;
+  padding: 0 12px;
+  background: #fff;
+}
+.report-info {
+  font-size: 16px;
+  gap: 16px;
+}
+.table1,
+.table2 {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: none;
+}
+table th, table td {
+  border: 1px solid #e5e7eb;
+}
+th {
+  background-color: #111827;
+  color: #fff;
+}
+.btn {
+  border-radius: 10px;
+}
+.btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+.btn-success {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+.submit {
+  margin-top: 24px;
+}
+
 </style>
 <script type="text/javascript">
         window.history.forward();
@@ -306,7 +390,7 @@ margin-top: 30px;
     <title>DAILY REPORT ATTENDANCE</title>
   </head>
   <body>
-   
+  <div class="page-shell">
   <form id="report_attendance" method="POST" action="<?= base_url('Public_page/submit') ?>">
   <div class="attendance-container">
     <table class="attendance-table">
@@ -442,7 +526,8 @@ margin-top: 30px;
     <button type="submit" class="btn btn-primary">SUBMIT ATTENDANCE REPORT</button>
   </div>
 
-</form>
+  </form>
+  </div>
 
 
 <script>
